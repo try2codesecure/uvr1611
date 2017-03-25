@@ -7,7 +7,9 @@
  * @copyright  Copyright (c) Bertram Winter bertram.winter@gmail.com
  * @license    GPLv3 License
  */
-class Parser
+error_reporting(0);
+
+class BlnetParser
 {
 	/**
 	 * Parser constant
@@ -26,6 +28,8 @@ class Parser
 	const TYPE_RADIATION = 0x4000;
 	const TYPE_RAS = 0x7000;
 	const RAS_POSITIVE_MASK = 0x000001FF;
+	const INT32_MASK = 0xFFFFFFFF;
+	const INT32_SIGN = 0x80000000;
 	
 	/**
 	 * Constructor
@@ -104,7 +108,7 @@ class Parser
 		// calculate result value
 		$result = $value & self::POSITIVE_VALUE_MASK;
 		if($value & self::SIGN_BIT) {
-			$result = -(($result ^ POSITIVE_VALUE_MASK)+1);
+			$result = -(($result ^ self::POSITIVE_VALUE_MASK)+1);
 		}
 		
 		// choose type
@@ -193,7 +197,12 @@ class Parser
 	private static function convertPower($value, $active, $position)
 	{
 		if($active & $position) {
-			return ($value/2560);
+			if($value & self::INT32_SIGN) {
+				return -(($value ^ self::INT32_MASK)+1) / 2560;
+			}
+			else {
+				return ($value/2560);
+			}
 		}
 		else {
 			return "NULL";

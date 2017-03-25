@@ -11,7 +11,7 @@ body {
 	right:0;
 	bottom:0;
 	top:100%;
-	position:fixed;
+	position:absolute;
 	background-color: #FFF;
 	display:none;
 }
@@ -51,6 +51,9 @@ div.chart {
 div.home {
 	background: url(../images/home.png) no-repeat transparent;
 }
+div.weather {
+	background: url(../images/weather.png) no-repeat transparent;
+}
 div.icon
 {
     background-position: 50% 100%;
@@ -89,21 +92,96 @@ div.hover > div.icon, div.active > div.icon {
 	margin-top:-210px;
 	width:400px;
 	height:80px;
+	z-index: 90;
 	position: absolute;
 }
 
 #contact {
 	color: #444;
-	position:absolute;
+	position:fixed;
 	right:20px;
 	top:10px;
+	z-index: 90;
 }
 #contact > a{
 	color: #444;
 }
 
+#login {
+	font-size:10px;
+	position:fixed;
+	right:20px;
+	top:35px;
+	z-index: 90;
+}
+
 .schema {
 	text-align: center;
+}
+
+.weatherinfo {
+	color: #444;
+	width: 600px;
+	margin: 20px auto;
+}
+
+.weatherinfo > table {
+	width: 200px;
+	table-layout: fixed;
+	border-collapse:collapse;
+}
+
+td.weatherprop {
+	font-weight: bold;
+	width: 120px;
+}
+td.weathervalue {
+	width: 80px;
+}
+
+.weatherinfo > h2 {
+	font-weight: bold;
+	font-size:2em;
+	margin-bottom:0;
+}
+div.weatherdetail {
+	font-weight: normal;
+	margin-bottom:50px;
+}
+span.weathercity {
+	font-weight: bold;
+}
+.weatherinfo > h3 {
+	font-weight: bold;
+	font-size:1.4em;
+	margin-bottom:5px;
+}
+
+table.weatherdetail {
+	width: 100%;
+	table-layout: fixed;
+	border-collapse:collapse;
+}
+
+table.weatherdetail td.leftalign {
+	text-align: left;
+}
+table.weatherdetail td.rightalign {
+	text-align: right;
+}
+
+table.weatherdetail span.temp {
+	font-weight: bold;
+}
+
+table.weatherdetail td.leftalign span.temp {
+	font-size:2em;
+}
+
+.weathericon, .weathersun {
+	position: relative;
+	float: right;
+	width: 200px
 }
 
 #pages {
@@ -125,7 +203,7 @@ div.hover > div.icon, div.active > div.icon {
 	border-bottom: 1px solid #DDD;
 	background-color: #EEE;
 	height: 35px;
-	position:absolute;
+	position:fixed;
 	width:100%;
 }
 
@@ -139,6 +217,14 @@ div.hover > div.icon, div.active > div.icon {
 	text-align:center;
 	font-size: 1.5em;
 }
+
+#slider {
+	position:absolute;
+	margin-top: 10px;
+	left: 20%;
+	width: 60%;
+}
+
 #buttonset {
 	right: 10px;
 	position:absolute;
@@ -151,6 +237,13 @@ div.hover > div.icon, div.active > div.icon {
 #home {
 	margin-top:2px;
 	left: 10px;
+	display:block;
+	position:absolute;
+}
+
+#editChart {
+	margin-top:2px;
+	left: 140px;
 	display:block;
 	position:absolute;
 }
@@ -219,6 +312,11 @@ table.chartinfo > tbody > tr > td {
 	text-align: center;
 }
 
+table.chartinfo > tbody > tr > td:first-child  {
+	text-align: left;
+	width: 200px;
+}
+
 table.chartinfo > tbody > tr > td.header {
 	text-align: left;
 	padding-left: 10px;
@@ -234,4 +332,59 @@ table.chartinfo div.value {
 
 table.chartinfo div.timestamp {
 	font-size: 0.8em;
+}
+
+div.dialogBox {
+	font-size: 0.9em;
+}
+
+#edit_chart_dialog {
+	display:none;
+}
+
+#edit_chart_tab table {
+	width: 100%;
+	height: 100%;
+	table-layout: fixed;
+	border-collapse:collapse;
+}
+
+#edit_chart_tab  table > thead > tr {
+	height: 20px;
+}
+
+#edit_chart_tab table th {
+	padding: 5px;
+	text-align: left;
+	font-weight: normal;
+}
+
+#edit_chart_tab table td {
+	padding: 5px;
+}
+
+#edit_chart_tab table > tbody > tr {
+	height: 100%;
+}
+
+ul.availableLines, ul.activeLines {
+	display: block;
+	list-style-type: none;
+	margin-top: 5px;
+	padding: 5px;
+	border: solid 1px #DDD;
+	height: 100%;
+}
+
+ul.availableLines > li, ul.activeLines > li {
+  margin: 0 2px 2px 2px;
+  padding: 2px;
+}
+
+#error {
+	position: fixed;
+	bottom: 5px;
+	left: 10px;
+	right: 10px;
+	display: none;
 }
